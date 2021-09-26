@@ -47,5 +47,7 @@ func Unpack(packedString string) (string, error) {
 		}
 	}
 
+	defer result.Reset()
+
 	return result.String(), nil
 }
