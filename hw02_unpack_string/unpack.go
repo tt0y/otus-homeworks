@@ -8,14 +8,15 @@ import (
 	"unicode"
 )
 
-var lastRune rune
-var result strings.Builder
+var (
+	lastRune rune
+	result   strings.Builder
+)
 
 var ErrInvalidString = errors.New("invalid string")
 
-func Unpack(PackedString string) (string, error) {
-
-	for i, currentRune := range PackedString {
+func Unpack(packedString string) (string, error) {
+	for i, currentRune := range packedString {
 		if unicode.IsDigit(currentRune) && i == 0 {
 			return "", ErrInvalidString
 		}
@@ -27,7 +28,6 @@ func Unpack(PackedString string) (string, error) {
 
 		if unicode.IsDigit(currentRune) {
 			runesCount, err := strconv.Atoi(string(currentRune))
-
 			if err != nil {
 				log.Fatal(err)
 			}
