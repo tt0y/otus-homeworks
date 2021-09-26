@@ -1,4 +1,4 @@
-module github.com/tt0y/otus_hw_golang/tree/master/hw02_unpack_string
+module github.com/tt0y/otus_hw_golang/hw02_unpack_string
 
 go 1.16
 
