@@ -21,6 +21,10 @@ func Unpack(packedString string) (string, error) {
 			return "", ErrInvalidString
 		}
 
+		if unicode.IsDigit(currentRune) && unicode.IsDigit(lastRune) {
+			return "", ErrInvalidString
+		}
+
 		if unicode.IsLetter(currentRune) {
 			result.WriteRune(currentRune)
 			lastRune = currentRune
