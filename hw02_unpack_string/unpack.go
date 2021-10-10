@@ -10,6 +10,7 @@ import (
 
 var (
 	lastRune rune
+	lastRuneIsDigit bool
 	result   strings.Builder
 )
 
@@ -17,20 +18,23 @@ var ErrInvalidString = errors.New("invalid string")
 
 func Unpack(packedString string) (string, error) {
 	for i, currentRune := range packedString {
+		lastRuneIsDigit = false
 		if unicode.IsDigit(currentRune) && i == 0 {
 			return "", ErrInvalidString
 		}
 
-		if unicode.IsDigit(currentRune) && unicode.IsDigit(lastRune) {
+		if unicode.IsDigit(currentRune) && lastRuneIsDigit == true {
 			return "", ErrInvalidString
 		}
 
 		if unicode.IsLetter(currentRune) {
+			lastRuneIsDigit = false
 			result.WriteRune(currentRune)
 			lastRune = currentRune
 		}
 
 		if unicode.IsDigit(currentRune) {
+			lastRuneIsDigit = true
 			runesCount, err := strconv.Atoi(string(currentRune))
 			if err != nil {
 				log.Fatal(err)
