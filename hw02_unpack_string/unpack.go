@@ -10,7 +10,7 @@ import (
 
 var (
 	lastRune        rune
-	lastRuneIsDigit bool = false
+	lastRuneIsDigit bool
 	result          strings.Builder
 )
 
@@ -22,7 +22,7 @@ func Unpack(packedString string) (string, error) {
 			return "", ErrInvalidString
 		}
 
-		if unicode.IsDigit(currentRune) && lastRuneIsDigit == true {
+		if unicode.IsDigit(currentRune) && lastRuneIsDigit {
 			return "", ErrInvalidString
 		}
 
