@@ -9,16 +9,15 @@ import (
 )
 
 var (
-	lastRune rune
-	lastRuneIsDigit bool
-	result   strings.Builder
+	lastRune        rune
+	lastRuneIsDigit bool = false
+	result          strings.Builder
 )
 
 var ErrInvalidString = errors.New("invalid string")
 
 func Unpack(packedString string) (string, error) {
 	for i, currentRune := range packedString {
-		lastRuneIsDigit = false
 		if unicode.IsDigit(currentRune) && i == 0 {
 			return "", ErrInvalidString
 		}
